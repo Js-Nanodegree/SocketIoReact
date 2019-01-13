@@ -13,8 +13,9 @@ import React,{Component} from 'react';
     
     renderTableBody =()=> {
         const {visitors}  = this.state;
-        return visitors.map(v => {return(
+        return visitors.map((v,index) => {return(
             <tr>
+                <td>{v.index+1}</td>
                 <td>{v.ip}</td>
                 <td>{v.city}</td>
                 <td>{v.country}</td>
@@ -23,19 +24,23 @@ import React,{Component} from 'react';
         )})
     }
     
-    
-    
-    
-    
-    
     render(){
          return(
              <React.Fragment>
                  <h2>Live Visitors</h2>
                  <table>
                      <thead>
-
+                        <tr>
+                            <th>#</th>
+                            <th>IP</th>
+                            <th>City</th>
+                            <th>Country</th>
+                            <th>State</th>
+                        </tr>
                      </thead>
+                     <tbody>
+                         {this.renderTableBody}
+                     </tbody>
                  </table>
              </React.Fragment>
          )
