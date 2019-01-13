@@ -3,9 +3,9 @@ var http = require('http').Server(app);
 
 var io = require('socket.io')(http);
 
-const port =3000
+const port =6000
 
-app.get('/socketio', function(req, res){
+app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
@@ -45,7 +45,7 @@ io.on('connection', function(socket){
 app.get('*',function (req,res){
     res.send('<h1>PAGE DONT FIND </h1>')
 })
-app.get('/', function(req, res){
+app.get('/socketio', function(req, res){
     res.send('<h1>Hello world</h1>');
   });
 

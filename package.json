@@ -1,24 +1,32 @@
 {
-  "name": "socket_io_react",
-  "version": "1.0.1",
-  "description": "build react with socket io",
-  "main": "index.js",
-  "scripts": {
-    "start": "nodemon index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Js-Nanodegree/SocketIoReact.git"
-  },
-  "author": "Yakimov V.A/",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Js-Nanodegree/SocketIoReact/issues"
-  },
-  "homepage": "https://github.com/Js-Nanodegree/SocketIoReact#readme",
+  "name": "chat-app-react",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "express": "^4.16.4",
-    "nodemon": "^1.18.9",
-    "socket.io": "^2.2.0"
-  }
+    "axios": "^0.18.0",
+    "bootstrap": "^4.1.3",
+    "express": "^4.15.2",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.0.4",
+    "reactstrap": "^6.5.0",
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
