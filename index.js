@@ -9,6 +9,18 @@ app.get('/socketio', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
+const getVisitors=()=>{
+    let clients =io.sockets.clients().connected
+    let sockets = Object.values(clients)
+    let users = sockets.map(s=>s.user)
+    return users
+}
+
+const emitVisitors =()=>{
+    io.emit('visitors',getVisitors())
+}
+
+
 io.on('connection', function(socket){
     console.log('user connect')
     socket.on('chat message', function(msg){
@@ -17,9 +29,11 @@ io.on('connection', function(socket){
     socket.on("new_visitor", user => {
         console.log("new_visitor", user);
         socket.user = user;
+        emitVisitors();
       });
     socket.on('disconnect',function(){
-        console.log('user disconnect')
+        emitVisitors();
+        console.log('user disconnect');
     })
   });
 
