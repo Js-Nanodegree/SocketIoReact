@@ -4,7 +4,7 @@ import React,{Component} from 'react';
  class LiveVisitors extends Component{
     state= {visitors:[
         {
-            ip:'localhost',
+            ip:'192.168.1.5.25',
             city:'Lahore',
             state:'phenian',
             country:'Pakistan'
@@ -15,7 +15,7 @@ import React,{Component} from 'react';
         const {visitors}  = this.state;
         return visitors.map((v,index) => {return(
             <tr>
-                <td>{v.index+1}</td>
+                <td>{index+1}</td>
                 <td>{v.ip}</td>
                 <td>{v.city}</td>
                 <td>{v.country}</td>
@@ -27,9 +27,11 @@ import React,{Component} from 'react';
     render(){
          return(
              <React.Fragment>
-                 <h2>Live Visitors</h2>
+                 
                  <table>
+                 
                      <thead>
+                     <h2>Live Visitors</h2>
                         <tr>
                             <th>#</th>
                             <th>IP</th>
@@ -39,7 +41,7 @@ import React,{Component} from 'react';
                         </tr>
                      </thead>
                      <tbody>
-                         {this.renderTableBody}
+                         {this.renderTableBody()}
                      </tbody>
                  </table>
              </React.Fragment>
