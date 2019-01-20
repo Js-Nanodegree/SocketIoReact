@@ -1,5 +1,6 @@
 import React from 'react'
 import SideBar from './SideBar'
+import {COMMUNITY_CHAT,TYPING,MESSAGE_SEND} from '../UUID/Event'
 
 export default class extends React.Component{
     constructor(props){
@@ -10,9 +11,30 @@ export default class extends React.Component{
         }
     }
 
+
+    componentDidMount(){
+        const{socket} =this.props
+        socket.emit(COMMUNITY_CHAT,this,resetChat)
+
+    }
+
+    resetChat=(chat)=>{
+        return this.addChat(chat,true)
+    }
+
+    addChat=(chat,reset)=>{
+        const {socket} =this.props
+        const{chats} = this.state
+        const newChats =reset?[chat]:[...chats,chat]
+        this.setState({chats:newChats})
+
+
+    }
+
+
     sendMessage=(chatId,message)=>{
         const {socket} = this.props
-        socket.emit(MESAGE_SEND, {chatId,message})
+        socket.emit(MESSAGE_SEND, {chatId,message})
 
     }
 
@@ -37,7 +59,18 @@ export default class extends React.Component{
                     user ={user}
                     activeChat ={activeChat}
                     setActivechat ={this.setActivechat}
-                    />
+                    /><div>
+                        {activeChat !== null?[
+                            <div>{activeChat.name}</div>
+                            <div messages={activeChat.messages}
+                            user={user}
+                            typingUsers={activeChat.typingUsers}/>
+                            <input 
+                            sendMessage={(message)=>{this.sendMessage(activeChat.id,message)}}
+                            sendTyping={(isTyping)=>{this.sendTyping(activeChat.id,isTyping)}}
+                            />
+                        ]:<>sdas</>}
+                    </div>
             </div>
         )
     }
