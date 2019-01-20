@@ -16,6 +16,7 @@ export  default class LoginForm extends React.Component{
             this.setError('User nameTaken')
         }else{
             this.props.setUser(user)
+            this.props.setUser(user)
         }
     }
     

@@ -2,7 +2,7 @@ var io =require('./index').io
 const {VERIFY_USER,USER_CONNECTED,USER_DISCONNECTED}=require('../src/UUID/Event')
 const {createChat,createMessage,createUser}=require('../src/UUID/Factoria')
 
-const connectedUser ={}
+let connectedUser ={}
 
 
 module.exports=function(socket){
@@ -15,6 +15,14 @@ module.exports=function(socket){
             callback({isUser:false,user:createUser({name:nickname})})
     }
 })
+    socket.on(USER_CONNECTED,(user)=>{
+        connectedUser =addUser(connectedUser,user)
+        socket.user =user
+        
+        io.emit(USER_CONNECTED,connectedUser)
+
+        console.log(connectedUser)
+    })
 
 }
 
