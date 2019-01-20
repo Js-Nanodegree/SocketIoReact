@@ -21,7 +21,7 @@ export default class Layout extends React.Component{
 
     initSocket =() =>{
         const socket = io(socketUrl)
-        socket.on('connect',()=>{
+        socket.on('CONNECTED',()=>{
             console.log('connected')
         })
         this.setState({socket})
@@ -40,10 +40,10 @@ export default class Layout extends React.Component{
     }
     
     render(){
-        const {socket} =this.props
+        const {socket} =this.state
         return(
             <div>
-                <LoginForm socket={socket} setUse={this.setUser}/>
+                <LoginForm socket={socket} setUser={this.setUser}/>
             </div>
         )
     }

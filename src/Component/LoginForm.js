@@ -5,20 +5,22 @@ export  default class LoginForm extends React.Component{
     constructor(props){
         super(props)
         this.state={
-            nickname:'',
-            error:''
+            nickname:"",
+            error:""
         }
     }
 
     setUser=({user,isUser})=>{
+        console.log(user,isUser)
         if(isUser){
             this.setError('User nameTaken')
         }else{
             this.props.setUser(user)
         }
     }
-
-    handleChange =(e)=>{
+    
+    
+    handleSubmit =(e)=>{
         e.preventDefault()
 
         const {socket}=this.props
@@ -26,10 +28,11 @@ export  default class LoginForm extends React.Component{
         socket.emit(VERIFY_USER,nickname,this.setUser)
 
     }
-
-    handleSubmit =(e)=>{
-        this.serState({nickname:e.target.value})
+    handleChange =(e)=>{
+        this.setState({nickname:e.target.value})
     }
+
+  
 
     setError=(error)=>{
         this.setState({error})

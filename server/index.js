@@ -1,5 +1,5 @@
 var app =require('http').createServer()
-var io =require('socket.io')(app)
+var io= module.exports.io = require('socket.io')(app)
 const SocketManager=require('./SocketManager')
 
 const PORT =process.envPort||4020
