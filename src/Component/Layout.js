@@ -1,6 +1,6 @@
 import React from 'react'
 import io from 'socket.io-client'
-import {USER_CONNECTED} from '../Event'
+import {USER_CONNECTED,USER_DISCONNECTED,LOGOUT} from '../Event'
 
 const socketUrl = "http://localhost:4020/"
 export default class Layout extends React.Component{
@@ -27,8 +27,14 @@ export default class Layout extends React.Component{
 
     setUser =(user)=>{
         const {socket}=this.state
-        socket.emit(USER_CONNECTED)
+        socket.emit(USER_CONNECTED,user)
         this.setState({user})
+    }
+
+    logout =()=>{
+        const {socket}=this.state
+        socket.emit(LOGOUT)
+        this.setState({user:null})
     }
     
     render(){
