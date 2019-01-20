@@ -2,7 +2,7 @@ import React from 'react'
 import io from 'socket.io-client'
 import {USER_CONNECTED,LOGOUT} from '../UUID/Event'
 import LoginForm from './LoginForm'
-
+import Containers from './chatContainer'
 
 const socketUrl = "http://localhost:4020/"
 export default class Layout extends React.Component{
@@ -40,10 +40,15 @@ export default class Layout extends React.Component{
     }
     
     render(){
-        const {socket} =this.state
+        const {socket,user} =this.state
         return(
             <div>
-                <LoginForm socket={socket} setUser={this.setUser}/>
+                {
+                    !user?
+                    <LoginForm socket={socket} setUser={this.setUser}/>
+                    :
+                    <Containers socket ={socket} user ={user} logout={this.logout}/>
+                }
             </div>
         )
     }
