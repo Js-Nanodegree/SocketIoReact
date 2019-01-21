@@ -1,55 +1,35 @@
 import React from 'react'
-import io from 'socket.io-client'
-import {USER_CONNECTED,LOGOUT} from '../UUID/Event'
-import LoginForm from './LoginForm'
-import Containers from './chatContainer'
+import ManageApi from './ManageApi'
+import GenereticApi from './GenericApi'
 
-const socketUrl = "http://localhost:4020/"
+
 export default class Layout extends React.Component{
-    
-    constructor(props){
-        super(props)
-        this.state ={
-            socket: null,
-            user:null
+        constructor(props) {
+        super(props);
+        this.state = {isToggleOn: null};
+        }
+        GapiClick=()=> {
+            this.setState({
+                isToggleOn: false});
+        }     
+        MapiClick=()=> {
+            this.setState({
+                isToggleOn: true});
+        }
+            
+          render(){
+            return(
+                <div>
+                    <div id='ButtonSelect'>
+                    <button onClick={this.GapiClick}> Управление ключами Api</button>
+                    <button onClick={this.MapiClick}>Сгенерировать ключи Api</button>
+                    <div>
+                        { this.state.isToggleOn  ?
+                          <GenereticApi/>: <ManageApi/>}
+                    </div>
+                    </div>
+
+                </div>
+            )
         }
     }
-
-    componentDidMount(){
-        this.initSocket()
-    }
-
-    initSocket =() =>{
-        const socket = io(socketUrl)
-        socket.on('CONNECTED',()=>{
-            console.log('connected')
-        })
-        this.setState({socket})
-    }
-
-    setUser =(user)=>{
-        const {socket}=this.state
-        socket.emit(USER_CONNECTED,user)
-        this.setState({user})
-    }
-
-    logout =()=>{
-        const {socket}=this.state
-        socket.emit(LOGOUT)
-        this.setState({user:null})
-    }
-    
-    render(){
-        const {socket,user} =this.state
-        return(
-            <div>
-                {
-                    !user?
-                    <LoginForm socket={socket} setUser={this.setUser}/>
-                    :
-                    <Containers socket ={socket} user ={user} logout={this.logout}/>
-                }
-            </div>
-        )
-    }
-}
